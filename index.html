@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Domain Price Inquiry</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+        <script>
+            function dosubmit() {
+                emailAddr = document.getElementById("email").value;
+                offer = document.getElementById("offer").value;
+                minOffer = 50000;
+                lblOffer = document.getElementById("lbl_offer");
+                if (offer < minOffer) {
+                    lblOffer.innerHTML = "Offer (in USD): <span style='color: red;'>Your offer"
+                        +" must be $"+minOffer+" or higher</span>";
+                    return false;
+                } else {
+                    document.getElementById("subject").value = "Price Inquiry for " + window.location.href;
+                    document.getElementById("message").value = "From: " + emailAddr + ", Offer: $" + offer;
+                    return true;
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <div class="container w-50 p-5 bg-light" style="margin-top: 10%;">
+            <h1>Make Your Offer</h1>
+            <form action="https://postmail.invotes.com/send" 
+                method="post" name="inquiry_form" id="inquiry_form" onsubmit="return dosubmit();">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" class="form-control" id="name" name="fullname" />
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" id="email" name="email" required />
+                </div>            
+                <div class="form-group">
+                    <label for="number" id="lbl_offer">Offer (in USD):</label>
+                    <input type="number" class="form-control" id="offer" name="offer" step="0.01" required />
+                </div>
+
+                <input type="hidden" name="subject" id="subject"/>
+                <textarea name="text" id="message" style="display: none;"></textarea>
+
+                <input type="hidden" name="access_token" value="hsllz71ul1enjwztrdsiko5i" />      
+                <input type="hidden" name="success_url" value="." />  
+                <input type="hidden" name="error_url" value=".?err=1" />
+            
+                <input type="submit" class="btn btn-primary" id="submit_form" value="Send" />        
+            </form>
+          </div>
+    </body>
+</html>
+
